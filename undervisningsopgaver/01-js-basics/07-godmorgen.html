@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="">
+</head>
+
+
+<body>
+
+
+    <style>
+    </style>
+
+
+    <p>Click the button to display the hour of the time right now.</p>
+
+    <button onclick="myFunction()">Try it</button>
+
+    <p id="demo"></p>
+
+    <script>
+        function myFunction() {
+            let d = new Date();
+            let n = d.getHours();
+            document.getElementById("demo").innerHTML = n;
+
+
+            if (n >= 18) {
+                console.log("godaften");
+            } else if (n >= 10) {
+                console.log("goddag");
+            } else if (n >= 5) {
+                console.log("godmorgen");
+            } else if (n >=0) {
+                console.log("godnat");
+            }
+        }
+
+    </script>
+
+
+
+
+</body>
+
+</html>
