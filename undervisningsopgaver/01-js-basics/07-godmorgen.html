@@ -23,7 +23,7 @@
     <p id="demo"></p>
 
     <script>
-        function myFunction() {
+        /*function myFunction() {
             let d = new Date();
             let n = d.getHours();
             document.getElementById("demo").innerHTML = n;
@@ -35,9 +35,23 @@
                 console.log("goddag");
             } else if (n >= 5) {
                 console.log("godmorgen");
-            } else if (n >=0) {
+            } else if (n >= 0) {
                 console.log("godnat");
             }
+        }*/
+
+        //Alternativ løsning:
+
+        const time = new Date().getHours();
+        console.log("Time", time);
+        if (time < 5) {
+            conosole.log("Godnat");
+        } else if (time < 10) {
+            console.log("Godmorgen")
+        } else if (time < 18) {
+            console.log("Goddag");
+        } else {
+            console.log("Godaften");
         }
 
     </script>
