@@ -106,9 +106,9 @@
 
 
     <script>
-        const overskrift = document.querySelector("h1");
-        overskrift.textContent = "Her er den udskiftet";
-        console.log(overskrift.textContent);
+        const overskrift1 = document.querySelector("h1");
+        overskrift1.textContent = "Her er den udskiftet";
+        console.log(overskrift1.textContent);
 
         const tekst1 = document.querySelector("article:nth-child(1) h3");
         tekst1.textContent = "Her ændrer jeg på vores tekst.";
@@ -125,6 +125,59 @@
         const tekst4 = document.querySelector("article:nth-child(2) p");
         tekst4.innerHTML = "Her ændrer <b>jeg</b> på vores tekst.";
         console.log(tekst4.innerHTML);
+
+        //Her starter vi med at udskifte billeder
+        const pic1 = document.querySelector("article:nth-child(1) img");
+        pic1.src = "billeder/anders.jpg";
+        pic1.alt = "Her er et flot billede af Anders";
+        console.log(pic1);
+
+        const pic2 = document.querySelector("article:nth-child(2) img");
+        pic2.src = "billeder/anders.jpg";
+        pic2.alt = "Her er endnu et flot af Anders";
+        console.log(pic2);
+
+
+
+
+
+
+        //Her starter vi med at tilføje nyt element
+
+
+        //Tager fat i section og kalder den mainSection
+        let mainSection = document.querySelector("section");
+
+        //Laver en helt ny article
+        let newArticle = document.createElement("article");
+
+        //Laver et ny img element og tilføjer en src før jeg appender den til newArticle
+        let pic3 = document.createElement("img");
+
+        pic3.src = "https://placeimg.com/300/400/arch";
+
+        newArticle.appendChild(pic3)
+
+        //Laver et h3 element med tekst, tilføjer h3 til overskrift, og overskrift til article.
+        let overskrift = document.createElement("h3");
+
+        let overskriftText = document.createTextNode("Article 3")
+
+        overskrift.appendChild(overskriftText);
+
+        newArticle.appendChild(overskrift);
+
+        //Laver et p element, skriver så en brødtekst, tilføjer brødteksten til p-elementet som så bliver tilføjet i article elementet.
+        let brodtekst = document.createElement("p");
+
+        let brodtekstText = document.createTextNode("Anders er så fucking sej")
+
+        brodtekst.appendChild(brodtekstText);
+
+        newArticle.appendChild(brodtekst);
+
+        //Tilføjer artiklen til mainSection som tager fat i  section fra vores HTML.
+        mainSection.appendChild(newArticle);
 
     </script>
 
