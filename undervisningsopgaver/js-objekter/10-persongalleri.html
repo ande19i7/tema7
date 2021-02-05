@@ -63,43 +63,50 @@
 
 
     <script>
-        const url = "https://persongalleri-5d3e.restdb.io/rest/persongalleri";
+        document.addEventListener("DOMContentLoaded", start);
 
-        const medieurl = "https://persongalleri-5d3e.restdb.io/media/";
 
-        const options = {
-            headers: {
-                'x-apikey': "600fe9211346a1524ff12e31"
+        function start() {
+
+            const url = "https://persongalleri-5d3e.restdb.io/rest/persongalleri";
+
+            const medieurl = "https://persongalleri-5d3e.restdb.io/media/";
+
+            const options = {
+                headers: {
+                    'x-apikey': "600fe9211346a1524ff12e31"
+                }
+            };
+
+            async function hentData() {
+                const resspons = await fetch(url, options);
+                const json = await resspons.json();
+                vis(json);
             }
-        };
 
-        async function hentData() {
-            const resspons = await fetch(url, options);
-            const json = await resspons.json();
-            vis(json);
+            const main = document.querySelector("main");
+            const template = document.querySelector("template").content;
+
+
+
+
+            function vis(json) {
+                console.log(json);
+                json.forEach(person => {
+                    const navn = `${person.fornavn} ${person.efternavn}`;
+                    const klon = template.cloneNode(true);
+                    klon.querySelector(".billede").src = medieurl + person.billede;
+                    klon.querySelector(".navn").textContent = navn;
+                    //VIRKER OGSÅ: klon.querySelector(".navn").innerHTML += ` ${person.efternavn}`;
+                    klon.querySelector(".titel").textContent = person.titel;
+                    klon.querySelector(".fødselsdag").textContent = person.fødselsdag;
+                    main.appendChild(klon);
+                })
+            }
+
+            hentData();
+
         }
-
-        const main = document.querySelector("main");
-        const template = document.querySelector("template").content;
-
-
-
-
-        function vis(json) {
-            console.log(json);
-            json.forEach(person => {
-                const navn = `${person.fornavn} ${person.efternavn}`;
-                const klon = template.cloneNode(true);
-                klon.querySelector(".billede").src = medieurl + person.billede;
-                klon.querySelector(".navn").textContent = navn;
-                //VIRKER OGSÅ: klon.querySelector(".navn").innerHTML += ` ${person.efternavn}`;
-                klon.querySelector(".titel").textContent = person.titel;
-                klon.querySelector(".fødselsdag").textContent = person.fødselsdag;
-                main.appendChild(klon);
-            })
-        }
-
-        hentData();
 
     </script>
 </body>
