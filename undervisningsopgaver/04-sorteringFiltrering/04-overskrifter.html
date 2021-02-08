@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="">
 
-//DENNE OPGAVE SKULLE JEG FAKTISK BARE STYLE KNAPPER, MEN JEG HAR OGSÅ FÅET DEM TIL AT VIRKE. SÅ 2 OG 3 ER DE SAMME
+
 
 <head>
     <meta charset="utf-8">
@@ -84,8 +84,8 @@
             top: 1px;
         }
 
-        button:focus {
-            background: linear-gradient(to bottom, #2d64f9 100%, #063efa 100%);
+        valgt {
+            background: linear-gradient(to bottom, #2d64f9 5%, #063efa 100%);
         }
 
     </style>
@@ -99,7 +99,9 @@
 <body>
 
 
-    <h1>Persongalleri</h1>
+    <header>
+        <h1>Alle</h1>
+    </header>
 
 
     <nav>
@@ -157,7 +159,7 @@
         function filtrerPersoner() {
             filter = this.dataset.troende;
 
-
+            header.textContent = this.textContent;
 
             visPersoner();
         }

@@ -49,18 +49,14 @@
 </head>
 
 <body>
-    <h1>Persongalleri</h1>
-    <section id="liste">
 
-    </section>
+    <section id="liste"></section>
 
     <template>
         <article class="person">
-            <img src="" alt="" class="billede">
             <h2 class="navn"></h2>
-            <p class="titel"></p>
-            <p class="fødselsdag"></p>
-            <p class="troende">Troende: </p>
+            <p class="køn"></p>
+            <img src="" alt="" class="profil-billede">
         </article>
     </template>
 
@@ -74,7 +70,6 @@
         }
         document.addEventListener("DOMContentLoaded", start)
         let personer;
-        let filter = "ja";
 
 
         // første funktion der kaldes efter DOM er loaded
@@ -101,16 +96,11 @@
             personer.forEach(person => {
 
                 // loop igennem json (personer)
-                if (filter == person.troende) {
-                    const klon = skabelon.cloneNode(true);
-                    klon.querySelector(".billede").src = medieurl + person.billede;
-                    klon.querySelector(".navn").textContent = person.fornavn + " " + person.efternavn;
-                    //VIRKER OGSÅ: klon.querySelector(".navn").innerHTML += ` ${person.efternavn}`;
-                    klon.querySelector(".titel").textContent = person.titel;
-                    klon.querySelector(".fødselsdag").textContent = person.fødselsdag;
-                    klon.querySelector(".troende").textContent += person.troende;
-                    dest.appendChild(klon);
-                }
+                const klon = skabelon.cloneNode(true);
+                klon.querySelector(".navn").textContent = person.fornavn + " " + person.efternavn;
+                klon.querySelector(".profil-billede").src = medieurl + person.billede;
+                dest.appendChild(klon);
+
             })
         }
     </script>
