@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        html {
+            font-family: sans-serif;
+        }
+
+        body {
+            background-color: black;
+        }
+
+        #liste {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-gap: 10px;
+            margin-left: 10vw;
+            margin-right: 10vw;
+        }
+
+        article {
+            border: 10px solid pink;
+            border-radius: 10px;
+            padding: 10px;
+            background-color: white;
+            transition: 0.5s;
+        }
+
+        article:hover {
+            transform: scale(1.02);
+        }
+
+
+
+        img {
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+        }
+
+        nav {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        button {
+            box-shadow: inset 0px -3px 7px 0px #29bbff;
+            background: linear-gradient(to bottom, #2dabf9 5%, #0688fa 100%);
+            background-color: #2dabf9;
+            border-radius: 3px;
+            border: 1px solid #0b0e07;
+            display: inline-block;
+            cursor: pointer;
+            color: #ffffff;
+            font-family: Arial;
+            font-size: 15px;
+            padding: 9px 23px;
+            text-decoration: none;
+            text-shadow: 0px 1px 0px #263666;
+
+
+            margin-left: 10px;
+            margin-right: 10px;
+
+
+        }
+
+        button:hover {
+            background: linear-gradient(to bottom, #2d64f9 5%, #063efa 100%);
+        }
+
+        button:active {
+            position: relative;
+            top: 1px;
+        }
+
+        .valgt {
+            background: linear-gradient(to bottom, #2d64f9 5%, #063efa 100%);
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <header>
+        <h1>Alle</h1>
+    </header>
+
+
+
+
+
+
+
+    <section id="liste">
+
+    </section>
+
+
+    <article class="person">
+        <img src="" alt="" class="billede">
+        <h2 class="navn"></h2>
+        <p class="titel"></p>
+        <p class="fødselsdag"></p>
+        <p class="troende">Troende: </p>
+    </article>
+
+    <button>Tilbage</button>
+
+
+
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get("id");
+
+        const medieurl = "https://persongalleri-5d3e.restdb.io/media/";
+        let person;
+        const myHeaders = {
+            "x-apikey": "600fe9211346a1524ff12e31"
+        }
+
+        console.log("ID", id);
+        document.addEventListener("DOMContentLoaded", loadJSON);
+
+        async function loadJSON() {
+            const JSONData = await fetch(`https://persongalleri-5d3e.restdb.io/rest/persongalleri/${id}`, {
+                headers: myHeaders
+            });
+            person = await JSONData.json();
+
+            console.log("Personer", person);
+            visPerson(person);
+        }
+
+        function visPerson() {
+            document.querySelector(".navn").textContent = person.fornavn + " " + person.efternavn;
+            document.querySelector(".billede").src = medieurl + person.billede;
+            document.querySelector(".titel").textContent = person.titel;
+
+            const string = person.fødselsdag;
+            const pattern = /[0-9][0-9][0-9][0-9][-][0-9][0-9][-][0-9][0-9]/;
+            const result = string.match(pattern);
+            document.querySelector(".fødselsdag").textContent = result;
+            document.querySelector(".troende").textContent += person.troende;
+            document.querySelector("button").addEventListener("click", tilbageTilPersonGalleri);
+        }
+
+        function tilbageTilPersonGalleri() {
+            history.back();
+        }
+
+    </script>
+</body>
+
+</html>
